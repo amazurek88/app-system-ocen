@@ -1,25 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import HomeView from "./HomeModule/HomeView";
+// @ts-ignore
+import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
+import InfoView from "./InfoModule/InfoView";
+import OcenyView from "./OcenyModule/OcenyView";
+import Page404 from "./ErrorModule/Page404";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Router>
+        <Switch>
+            <Route exact path={"/"}><Redirect to={'/start'}/></Route>
+            <Route exact path={"/start"} component={HomeView}/>
+            <Route exact path={"/oceny"} component={OcenyView}/>
+            <Route exact path={"/info"} component={InfoView}/>
+            <Route exact path={"/error"} component={Page404}/>
+            <Redirect to={"/error"}/>
+        </Switch>
+      </Router>
   );
 }
 
